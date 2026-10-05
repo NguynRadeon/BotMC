@@ -221,7 +221,7 @@ client.on('interactionCreate', async (interaction) => {
     // Lệnh ping
     if (message.content === '//ping') {
         try {
-            const result = await util.status(SERVER_IP, 25565); // ping trực tiếp Java server
+            const result = await util.status(SERVER_IP, 25565, { timeout: 10000 }); // ping trực tiếp Java server
             const ping = result.roundTripLatency;
 
             const embed = new EmbedBuilder()
