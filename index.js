@@ -38,6 +38,8 @@ if (!SERVER_IP) {
     throw new Error(`Chưa nhập IP máy chủ trong ${serverIpFile}`);
 }
 
+const MAP_URL = `http://${SERVER_IP}:8100`;
+
 // Hàm cập nhật trạng thái bot
 async function updatePresence() {
     try {
@@ -85,6 +87,7 @@ client.on('messageCreate', async (message) => {
                 { name: "//ping", value: "Xem độ trễ (ping) của server", inline: false },
                 { name: "//ver", value: "Xem phiên bản máy chủ", inline: false },
                 { name: "//playeron", value: "Xem số lượng và danh sách người chơi online", inline: false },
+                { name: "//map", value: "Mở bản đồ thế giới Minecraft", inline: false },
             )
             .setFooter({ text: "Bot Minecraft by NguyenRadeon" })
             .setTimestamp();
@@ -237,6 +240,18 @@ client.on('interactionCreate', async (interaction) => {
 
             message.channel.send({ embeds: [embed] });
         }
+    }
+
+    // Lệnh map
+    if (message.content === '//map') {
+        const embed = new EmbedBuilder()
+            .setColor(0x2ecc71)
+            .setTitle('🗺️ Bản đồ thế giới Minecraft')
+            .setURL(MAP_URL)
+            .setDescription(`[Nhấn vào đây để xem bản đồ](${MAP_URL})`)
+            .setTimestamp();
+
+        await message.reply({ embeds: [embed] });
     }
 });
 
