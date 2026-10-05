@@ -1,2 +1,2 @@
 # Nhập IP máy chủ tại đây
-playmc.asuscomm.com
+Example.com
